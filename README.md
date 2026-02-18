@@ -2,8 +2,9 @@
 
 ![Tests](https://github.com/SKmodels/numerical-root-finder/actions/workflows/tests.yml/badge.svg)
 
-A small Python library implementing classical numerical methods for solving nonlinear equations: f(x) = 0
-\nPart of the **SKmodels** portfolio focused on scientific computing and numerical analysis.
+A small Python library implementing classical numerical methods for solving nonlinear equations: f(x) = 0.
+
+Part of the **SKmodels** portfolio focused on scientific computing and numerical analysis.
 ---
 ## Implemented Methods
 - Newton-Raphson (derivative-based, quadratic convergence)
