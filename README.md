@@ -15,9 +15,13 @@ Part of the **SKmodels** portfolio focused on scientific computing and numerical
 git clone https://github.com/SKmodels/numerical-root-finder.git
 cd numerical-root-finder
 ```
-### Install dependencies 
+### Install runtime dependencies 
 ```bash
 pip install -r requirements.txt
+```
+### Install development dependencies
+```bash
+pip install -r requirements-dev.txt 
 ```
 
 ## Example usage
@@ -42,7 +46,6 @@ print("Converged:", result.converged)
 ```
 ### Convergence plot (Newton vs Bisection)
 ```bash
-pip install -r requirements-dev.txt
 python -m examples.plot_convergence
 ```
 ### Running test
