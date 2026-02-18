@@ -8,6 +8,7 @@ Part of the **SKmodels** portfolio focused on scientific computing and numerical
 ## Implemented Methods
 - Newton-Raphson (derivative-based, quadratic convergence)
 - Bisection (bracketing method, guaranteed convergence)
+- Secant (derative-free, superlinear convergence)
 ---
 ## Installation 
 ### Repository
@@ -47,6 +48,10 @@ print("Converged:", result.converged)
 ### Convergence plot (Newton vs Bisection)
 ```bash
 python -m examples.plot_convergence
+```
+### Secant method
+```bash
+python -m examples.secant_usage
 ```
 ### Running test
 ```bash
