@@ -40,6 +40,11 @@ result = bisection_method(f, a=1.0, b=2.0)
 print("Root:", result.root)
 print("Converged:", result.converged)
 ```
+### Convergence plot (Newton vs Bisection)
+```bash
+pip install -r requirements-dev.txt
+python -m examples.plot_convergence
+```
 ### Running test
 ```bash
 pytest
