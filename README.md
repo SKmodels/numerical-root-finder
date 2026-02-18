@@ -5,6 +5,17 @@ This project is part of SKmodels portfolio, focused on building strong foundatio
 ## Implemented Methods
 - Newton-Raphson Method
 
+## How it works
+- Convergence criterion: |x_{n+1} - x-n| < tol
+- Safety: derivative threshold to avoice unstable steps
+
+## Roadmap
+- Bisection method
+- Secant method
+- CLI (user chooses method / function)
+- Unit tests with pytest
+- Plot convergence (matplotlib)
+
 ## Example usage
 ```bash
 python -m examples.example_usage
