@@ -11,6 +11,19 @@ Part of the SKmodels portfolio focused on scientific computing and numerical ana
 - Newton-Raphson (derivative-based, quadratic convergence)
 - Bisection (bracketing method, guaranteed convergence)
 - Secant (derative-free, superlinear convergence)
+
+## Convergence Properties
+- Bisection - Bracketing (Robust) - Linear (p ~ 1)  
+- Secant - Derivative-free - Superlinear (p ~ 1.618)  
+- Newton - Derivative-based - Quadratics (p ~ 2)  
+
+Where the order of convergence \(p\) is defined by:  
+
+\[
+\lim_{n \ to \infty} \frac{\log(e_{n+1}/e_n)}{log(e_n/{n-1})}
+\]
+
+with \( e_n = |x_n - r| \)
 ---
 ## Installation 
 ### Repository
@@ -55,12 +68,38 @@ python -m examples.plot_convergence
 ```bash
 python -m examples.secant_usage
 ```
-### Running test
+### Convergence Comparison
+
+Example convergence behaviour for solving x^2 - 2 = 0
+
+![Convergence Plot](docs/convergence.png)
+
+## Testing
+
+All methods are validated using:
+
+- Analytical convergence order estimation
+- Bracket shrink guarantees (bisection)
+- Known closed-form roots (sqrt(2) example)
+- Continuous integration via GitHub Actions
+
+### Running test locally
 ```bash
 pytest
 ```
-## Roadmap
-- Secant method
-- Convergence visualisation
-- Unified solver interface
-- Performance comparison benchmarks 
+## Design Philosophy 
+
+- All solvers retur structures result objects containing: 
+  - 'root'
+  - 'converged'
+  - 'iterations'
+  - 'history' of approximations
+- Convergence behaviour can be analysed programmatically 
+- Unified solver interface ('solve()') supports multiple algorithms
+- CI-tested using 'pytest' and GitHub Actions.
+
+## Why This Project?
+
+Root-finding is a foundational problem in scientific computing, numerical analysis, optimisation and machine learning.
+
+This project was built as part of the SKmodels portfolio to develop a deeper understanding of numerical stability, convergence theory and algorithmic design. 
