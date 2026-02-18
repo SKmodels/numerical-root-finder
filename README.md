@@ -1,20 +1,12 @@
 # numerical-root-finder
-Implementation of classical numerical methods for solving nonlinear equations in Python.
+Implementation of classical numerical methods for solving nonlinear equations \(f(x)=0\) in Python.
 This project is part of SKmodels portfolio, focused on building strong foundations in scientific computing and numerical analysis. 
 
 ## Implemented Methods
-Newton-Raphson Method (in progress)
+- Newton-Raphson Method
 
 ## Example usage
-```python
-from methods.newton import newton_method
+```bash
+python -m examples.example_usage
 
-def f(x):
-  return x**2 - 2
-
-def df(x):
-  return 2*x
-
-root, iterations, converged = newton_method(f, df, x0=1.0)
-print("Root:", root)
 

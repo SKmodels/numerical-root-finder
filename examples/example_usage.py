@@ -81,7 +81,6 @@ def newton_method(
         history=history,
     )
 
-from methods.newton import newton_method
 def main() -> None:
     # Example: solve x^2 - 2 = 0 (root = sqrt(2))
     def f(x: float) -> float:
