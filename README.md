@@ -24,8 +24,7 @@ Where the order of convergence \(p\) is defined by:
 
 $$
 p = \lim_{n \to \infty}
-\frac{\log(e_{n+1}/e_n)}
-{\log(e_n/e_{n-1})}
+\frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}
 $$
 
 where  
