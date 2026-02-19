@@ -70,16 +70,74 @@ print("Root:", result.root)
 print("Converged:", result.converged)
 ```
 ### Secant method
-```bash
-python -m examples.secant_usage
+```python
+from methods.secant import secant_method
+
+def main():
+    f = lambda x: x**2 - 2
+    result = secant_method(f, x0=1.0, x1=2.0)
+
+    print("Root:", result.root)
+    print("Iterations:", result.iterations)
+    print("Converged:", result.converged)
+    print("Verification f(root):", f(result.root))
 ```
 ### Brent's method
-```bash 
-python -m examples.brent_usage.py
+```python
+from methods.brent import brent_method
+
+def main():
+    f = lambda x: x**2 - 2
+    result = brent_method(f, a=1.0, b=2.0)
+
+    print("Root:", result.root)
+    print("Iterations:", result.iterations)
+    print("Converged:", result.converged)
 ```
 ### Convergence plot
-```bash
-python -m examples.plot_convergence
+```python
+from methods.bisection import bisection_method
+from methods.newton import newton_method
+from methods.brent import brent_method
+from methods.secant import secant_method
+from pathlib import Path
+
+def main() -> None:
+  # Target: solve x^2 - 2 = 0 -> root = sqrt(2)
+  true_root = math.sqrt(2)
+
+  f= lambda x: x**2 - 2
+  df = lambda x: 2 * x
+
+  newton = newton_method(f, df, x0=1.5)
+  bisect = bisection_method(f, a=1.0, b=2.0)
+  brent = brent_method(f, a=1.0, b=2.0)
+  secant = secant_method(f, x0=1.0, x1=2.0)
+    
+  # Your result objects have a `history` attribute that contains the sequence of approximations.
+  newton_err = [abs(x - true_root) for x in newton.history]
+  bisect_err = [abs(x - true_root) for x in bisect.history]
+  brent_err = [abs(x - true_root) for x in brent.history]
+  secant_err = [abs(x - true_root) for x in secant.history]
+
+  plt.figure()
+  plt.semilogy(range(len(newton_err)), newton_err, marker="o", label="Newton")
+  plt.semilogy(range(len(bisect_err)), bisect_err, marker="o", label="Bisection")
+  plt.semilogy(range(len(brent_err)), brent_err, marker="o", label="Brent")
+  plt.semilogy(range(len(secant_err)), secant_err, marker="o", label="Secant")
+  plt.xlabel("Iteration")
+  plt.ylabel("Absolute Error |x - sqrt(2)|")
+  plt.title("Convergence comparison")
+  plt.legend()
+  plt.grid(True, which="both", linestyle="--", linewidth=0.5)
+  plt.tight_layout()
+  project_root = Path(__file__).resolve().parents[1]
+  docs_path = project_root / "docs"
+  docs_path.mkdir(exist_ok=True)  # Ensure the docs directory exists
+  out_file = docs_path / "convergence.png"
+  print(f"Saving convergence plot to: {out_file}")
+  plt.savefig(out_file, dpi=300, bbox_inches="tight")
+  plt.show()
 ```
 ## Convergence Comparison
 
