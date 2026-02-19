@@ -2,6 +2,7 @@ from typing import Callable, Optional
 from methods.bisection import bisection_method
 from methods.newton import newton_method
 from methods.secant import secant_method
+from methods.brent import brent_method
 
 def solve(
     method: str,
@@ -16,7 +17,7 @@ def solve(
 ):
 
     method = method.lower()
-    
+
     if method == 'newton':
         if df is None or x0 is None:
             raise ValueError("Newton's method requires df and x0")
@@ -29,6 +30,10 @@ def solve(
         if a is None or b is None:
             raise ValueError("Bisection method requires a and b")
         return bisection_method(f, a=a, b=b, tol=tol, max_iter=max_iter)
+    elif method == 'brent':
+        if a is None or b is None:
+            raise ValueError("Brent's method requires a and b")
+        return brent_method(f, a=a, b=b, tol=tol, max_iter=max_iter)
     else:
         raise ValueError(f"Unknown method: {method}. Choose 'newton', 'secant', or 'bisection'.")
     

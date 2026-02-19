@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 
 from methods.bisection import bisection_method
 from methods.newton import newton_method
+from methods.brent import brent_method
+from methods.secant import secant_method
 from pathlib import Path
 
 def main() -> None:
@@ -17,14 +19,20 @@ def main() -> None:
 
     newton = newton_method(f, df, x0=1.5)
     bisect = bisection_method(f, a=1.0, b=2.0)
+    brent = brent_method(f, a=1.0, b=2.0)
+    secant = secant_method(f, x0=1.0, x1=2.0)
     
     # Your result objects have a `history` attribute that contains the sequence of approximations.
     newton_err = [abs(x - true_root) for x in newton.history]
     bisect_err = [abs(x - true_root) for x in bisect.history]
+    brent_err = [abs(x - true_root) for x in brent.history]
+    secant_err = [abs(x - true_root) for x in secant.history]
 
     plt.figure()
     plt.semilogy(range(len(newton_err)), newton_err, marker="o", label="Newton")
     plt.semilogy(range(len(bisect_err)), bisect_err, marker="o", label="Bisection")
+    plt.semilogy(range(len(brent_err)), brent_err, marker="o", label="Brent")
+    plt.semilogy(range(len(secant_err)), secant_err, marker="o", label="Secant")
     plt.xlabel("Iteration")
     plt.ylabel("Absolute Error |x - sqrt(2)|")
     plt.title("Convergence comparison")

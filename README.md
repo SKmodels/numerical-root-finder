@@ -11,9 +11,10 @@ f(x) = 0
 Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis and algorithm design.
 ---
 ## Implemented Methods
-- Newton-Raphson (derivative-based, quadratic convergence)
-- Bisection (bracketing method, guaranteed convergence)
-- Secant (derative-free, superlinear convergence)
+- **Newton-Raphson** - Quadratic convergence (order 2)
+- **Bisection** - Guaranteed convergence (linear order 1)
+- **Secant** - Superlinear convergence (~1.618)
+- **Brent's Method** - Hybrid bracketing + Interpolation (robust and fast)
 
 ## Convergence Properties
 - Bisection - Bracketing (Robust) - Linear (p ~ 1)  
@@ -68,15 +69,19 @@ result = bisection_method(f, a=1.0, b=2.0)
 print("Root:", result.root)
 print("Converged:", result.converged)
 ```
-### Convergence plot (Newton vs Bisection)
-```bash
-python -m examples.plot_convergence
-```
 ### Secant method
 ```bash
 python -m examples.secant_usage
 ```
-### Convergence Comparison
+### Brent's method
+```bash 
+python -m examples.brent_usage.py
+```
+### Convergence plot
+```bash
+python -m examples.plot_convergence
+```
+## Convergence Comparison
 
 Example convergence behaviour for solving:
 
@@ -87,6 +92,22 @@ x^2 - 2 = 0
 <p align="center">
   <img src="docs/convergence.png" width="600"/>
 </p>
+
+- Newton - faster near the root (quadratic) however, requires a derivative & a decent initial guess.
+- Bisection - guaranteed convergence when the root is bracketed, but slower (linear).
+- Secant - derivative-free & usually faster than bisection (superlinear), but not guaranteed convergence.
+- Brent's method - achieves near-Newton speed while retaining bisection robustness.
+
+## Performance Benchmark 
+
+Example solving x^2 - 2 = 0
+
+Method      Iterations    Final Error  
+-------------------------------------
+Newton         4            0.00e+00         
+Secant         6            2.22e-16        
+Bisection     27            1.85e-09         
+Brent          5            4.17e-14        
 
 ### Unified Solver Interface
 
