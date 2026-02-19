@@ -156,16 +156,17 @@ x^2 - 2 = 0
 - Secant - derivative-free & usually faster than bisection (superlinear), but not guaranteed convergence.
 - Brent's method - achieves near-Newton speed while retaining bisection robustness.
 
-## Performance Benchmark 
+## Performance Benchmark
 
-Example solving x^2 - 2 = 0
+Example solving \( x^2 - 2 = 0 \)
 
-Method      Iterations    Final Error  
--------------------------------------
-Newton         4            0.00e+00         
-Secant         6            2.22e-16        
-Bisection     27            1.85e-09         
-Brent          5            4.17e-14        
+| Method     | Iterations | Final Error   | Time (s)  |
+|------------|------------|---------------|-----------|
+| Newton     | 4          | 0.00e+00      | 0.000014  |
+| Secant     | 6          | 2.22e-16      | 0.000007  |
+| Bisection  | 27         | 1.85e-09      | 0.000012  |
+| Brent      | 5          | 4.17e-14      | 0.000028  |
+  
 
 ### Unified Solver Interface
 
