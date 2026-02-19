@@ -160,7 +160,7 @@ Example convergence behaviour for solving:
 ```bash
 x^2 - 2 = 0
 ```
-<img src="docs/convergence.png"> width="600">
+<img src="docs/convergence.png">
 
 *Absolte error vs iteration (log scale).*
 
