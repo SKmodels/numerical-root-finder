@@ -4,7 +4,9 @@
 
 A small Python library implementing classical numerical methods for solving nonlinear equations:  
 
-$$f(x) = 0$$
+$$
+f(x) = 0
+$$
 
 Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis and algorithm design.
 ---
@@ -20,7 +22,9 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 - Secant - Derivative-free - Superlinear (p ~ 1.618)  
 - Brent's - Bracketing (robust) + inverse quadratic interpolation/secant (fast), with bisection fallback to guarantee convergence
 
-Where the order of convergence \(p\) is defined by:  
+### Definition of Convergence Order
+
+The order of convergence \(p\) is defined by:
 
 $$
 p = \lim_{n \to \infty}
@@ -33,7 +37,6 @@ $$
 e_n = |x_n - r|
 $$
 
----
 ## Installation 
 ### Repository
 ```bash
@@ -156,12 +159,14 @@ Run the comparison
 ```bash
 python -m examples.plot_convergence
 ```
+---
 Example convergence behaviour for solving:
 
 $$
 x^2 - 2 = 0
 $$
 
+---
 <img src="docs/convergence.png"> width="600">
 
 *Absolte error vs iteration (log scale).*
