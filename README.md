@@ -9,10 +9,14 @@ A small Python library implementing classical numerical methods for solving nonl
 Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis and algorithm design.
 ---
 ## Implemented Methods
-- **Newton-Raphson** - Quadratic convergence (order 2)
+- **Newton-Raphson** (1D) - Quadratic convergence (order 2)
 - **Bisection** - Guaranteed convergence (linear order 1)
 - **Secant** - Superlinear convergence (~1.618)
 - **Brent's Method** - Hybrid bracketing + Interpolation (robust and fast)
+- **Multidimensional Newton Systems** 
+- **Optional Analytic or Finite-difference Jacobians**
+- **Backtracking Line search**
+- **Convergence Tracking**
 
 ## Convergence Properties
 - Newton - Derivative-based - Quadratics (p ~ 2)  
@@ -56,13 +60,14 @@ pip install -r requirements-dev.txt
 To run each method;
 
 ```bash
-python -m [name]_usage
+python -m examples.[name]_usage
 ```
 ### Newton-Raphson method
+
 ```python 
 from methods.newton import newton_method
 
-f = lambda x: x**2 - 2 
+f = lambda x: x**2 - 2
 df = lambda x: 2*x
 
 result = newton_method(f, df, x0=1.5)
@@ -70,11 +75,42 @@ result = newton_method(f, df, x0=1.5)
 print("Root:", result.root)
 print("Converged:", result.converged)
 ```
+### Multidimensional Newton System
+
+```python
+import numpy as np
+from methods.solver import solve_system
+
+def F(v):
+    x, y = v
+    return np.array([
+        x**2 + y**2 - 1.0,
+        x - y
+    ])
+
+def J(v):
+    x, y = v
+    return np.array([
+        [2*x, 2*y],
+        [1.0, -1.0]
+    ])
+
+res = solve_system(
+    method="newton",
+    F=F,
+    x0=[0.8, 0.6],
+    jac=J
+)
+
+print("Root:", res.root)
+print("Converged:", res.converged)
+```
 ### Bisection method
-```python 
+
+```python
 from methods.bisection import bisection_method
 
-f = lambda x: x**2 - 2 
+f = lambda x: x**2 - 2
 
 result = bisection_method(f, a=1.0, b=2.0)
 
@@ -85,71 +121,71 @@ print("Converged:", result.converged)
 ```python
 from methods.secant import secant_method
 
-def main():
-    f = lambda x: x**2 - 2
-    result = secant_method(f, x0=1.0, x1=2.0)
+f = lambda x: x**2 - 2
 
-    print("Root:", result.root)
-    print("Iterations:", result.iterations)
-    print("Converged:", result.converged)
-    print("Verification f(root):", f(result.root))
+result = secant_method(f, x0=1.0, x1=2.0)
+
+print("Root:", result.root)
+print("Iterations:", result.iterations)
+print("Converged:", result.converged)
 ```
 ### Brent's method
 ```python
 from methods.brent import brent_method
 
-def main():
-    f = lambda x: x**2 - 2
-    result = brent_method(f, a=1.0, b=2.0)
+f = lambda x: x**2 - 2
 
-    print("Root:", result.root)
-    print("Iterations:", result.iterations)
-    print("Converged:", result.converged)
+result = brent_method(f, a=1.0, b=2.0)
+
+print("Root:", result.root)
+print("Iterations:", result.iterations)
+print("Converged:", result.converged)
 ```
 ### Convergence plot
 ```python
+import math
+import matplotlib.pyplot as plt
+from pathlib import Path
+
 from methods.bisection import bisection_method
 from methods.newton import newton_method
 from methods.brent import brent_method
 from methods.secant import secant_method
-from pathlib import Path
+true_root = math.sqrt(2)
 
-def main() -> None:
-  # Target: solve x^2 - 2 = 0 -> root = sqrt(2)
-  true_root = math.sqrt(2)
+f = lambda x: x**2 - 2
+df = lambda x: 2 * x
 
-  f= lambda x: x**2 - 2
-  df = lambda x: 2 * x
+newton = newton_method(f, df, x0=1.5)
+bisect = bisection_method(f, a=1.0, b=2.0)
+brent = brent_method(f, a=1.0, b=2.0)
+secant = secant_method(f, x0=1.0, x1=2.0)
 
-  newton = newton_method(f, df, x0=1.5)
-  bisect = bisection_method(f, a=1.0, b=2.0)
-  brent = brent_method(f, a=1.0, b=2.0)
-  secant = secant_method(f, x0=1.0, x1=2.0)
-    
-  # Your result objects have a `history` attribute that contains the sequence of approximations.
-  newton_err = [abs(x - true_root) for x in newton.history]
-  bisect_err = [abs(x - true_root) for x in bisect.history]
-  brent_err = [abs(x - true_root) for x in brent.history]
-  secant_err = [abs(x - true_root) for x in secant.history]
+newton_err = [abs(x - true_root) for x in newton.history]
+bisect_err = [abs(x - true_root) for x in bisect.history]
+brent_err = [abs(x - true_root) for x in brent.history]
+secant_err = [abs(x - true_root) for x in secant.history]
 
-  plt.figure()
-  plt.semilogy(range(len(newton_err)), newton_err, marker="o", label="Newton")
-  plt.semilogy(range(len(bisect_err)), bisect_err, marker="o", label="Bisection")
-  plt.semilogy(range(len(brent_err)), brent_err, marker="o", label="Brent")
-  plt.semilogy(range(len(secant_err)), secant_err, marker="o", label="Secant")
-  plt.xlabel("Iteration")
-  plt.ylabel("Absolute Error |x - sqrt(2)|")
-  plt.title("Convergence comparison")
-  plt.legend()
-  plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-  plt.tight_layout()
-  project_root = Path(__file__).resolve().parents[1]
-  docs_path = project_root / "docs"
-  docs_path.mkdir(exist_ok=True)  # Ensure the docs directory exists
-  out_file = docs_path / "convergence.png"
-  print(f"Saving convergence plot to: {out_file}")
-  plt.savefig(out_file, dpi=300, bbox_inches="tight")
-  plt.show()
+plt.figure()
+plt.semilogy(newton_err, marker="o", label="Newton")
+plt.semilogy(bisect_err, marker="o", label="Bisection")
+plt.semilogy(brent_err, marker="o", label="Brent")
+plt.semilogy(secant_err, marker="o", label="Secant")
+
+plt.xlabel("Iteration")
+plt.ylabel("Absolute Error |x - sqrt(2)|")
+plt.title("Convergence Comparison")
+plt.legend()
+plt.grid(True, which="both", linestyle="--", linewidth=0.5)
+plt.tight_layout()
+
+project_root = Path(__file__).resolve().parents[1]
+docs_path = project_root / "docs"
+docs_path.mkdir(exist_ok=True)
+
+out_file = docs_path / "convergence.png"
+plt.savefig(out_file, dpi=300, bbox_inches="tight")
+plt.show()
 ```
 ## Convergence Comparison
 
@@ -189,7 +225,7 @@ Example solving \( x^2 - 2 = 0 \)
 | Brent      | 5          | 4.17e-14      | 0.000028  |
   
 
-### Unified Solver Interface
+## Unified Solver Interface
 
 - The solve() function provides a unified interface:
 
@@ -203,6 +239,19 @@ result = solve(
   x1=2.0
 )
 ```
+### Using solve() for Multidimensional Newton Systems
+```python
+The solver computes updates by solving:
+
+    J(x_k) Δx_k = -F(x_k)
+
+and updates:
+
+    x_{k+1} = x_k + α Δx_k
+
+where α is determined by an Armijo-style backtracking line search.
+```
+
 ## Testing & CI
 
 All methods are validated using:
