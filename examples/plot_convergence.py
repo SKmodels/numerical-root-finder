@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 from methods.bisection import bisection_method
 from methods.newton import newton_method
+from pathlib import Path
 
 def main() -> None:
     # Target: solve x^2 - 2 = 0 -> root = sqrt(2)
@@ -30,6 +31,12 @@ def main() -> None:
     plt.legend()
     plt.grid(True, which="both", linestyle="--", linewidth=0.5)
     plt.tight_layout()
+    project_root = Path(__file__).resolve().parents[1]
+    docs_path = project_root / "docs"
+    docs_path.mkdir(exist_ok=True)  # Ensure the docs directory exists
+    out_file = docs_path / "convergence.png"
+    print(f"Saving convergence plot to: {out_file}")
+    plt.savefig(out_file, dpi=300, bbox_inches="tight")
     plt.show()
 
 if __name__ == "__main__":

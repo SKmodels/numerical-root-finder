@@ -3,9 +3,12 @@
 ![Tests](https://github.com/SKmodels/numerical-root-finder/actions/workflows/tests.yml/badge.svg)
 
 A small Python library implementing classical numerical methods for solving nonlinear equations:  
-**f(x) = 0**
 
-Part of the SKmodels portfolio focused on scientific computing and numerical analysis.
+\[
+f(x) = 0
+\]
+
+Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis and algorithm design.
 ---
 ## Implemented Methods
 - Newton-Raphson (derivative-based, quadratic convergence)
@@ -20,10 +23,11 @@ Part of the SKmodels portfolio focused on scientific computing and numerical ana
 Where the order of convergence \(p\) is defined by:  
 
 \[
-\lim_{n \ to \infty} \frac{\log(e_{n+1}/e_n)}{log(e_n/{n-1})}
+p = \lim_{n \ to \infty} 
+\frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}
 \]
 
-with \( e_n = |x_n - r| \)
+where \( e_n = |x_n - r| \)
 ---
 ## Installation 
 ### Repository
@@ -44,19 +48,23 @@ pip install -r requirements-dev.txt
 ### Newton-Raphson method
 ```python 
 from methods.newton import newton_method
+
 f = lambda x: x**2 - 2 
 df = lambda x: 2*x
 
 result = newton_method(f, df, x0=1.5)
+
 print("Root:", result.root)
 print("Converged:", result.converged)
 ```
 ### Bisection method
 ```python 
 from methods.bisection import bisection_method
+
 f = lambda x: x**2 - 2 
 
 result = bisection_method(f, a=1.0, b=2.0)
+
 print("Root:", result.root)
 print("Converged:", result.converged)
 ```
@@ -70,11 +78,31 @@ python -m examples.secant_usage
 ```
 ### Convergence Comparison
 
-Example convergence behaviour for solving x^2 - 2 = 0
+Example convergence behaviour for solving:
 
-![Convergence Plot](docs/convergence.png)
+\[
+x^2 - 2 = 0
+\]
 
-## Testing
+<p align="center">
+  <img src="docs/convergence.png" width="600"/>
+</p>
+
+### Unified Solver Interface
+
+- The solve() function provides a unified interface:
+
+```python
+from methods.solver import solve
+
+result = solve(
+  method="secant",
+  f=lambda x: x**2 - 2,
+  x0=1.0
+  x1=2.0
+)
+```
+## Testing & CI
 
 All methods are validated using:
 
@@ -83,7 +111,7 @@ All methods are validated using:
 - Known closed-form roots (sqrt(2) example)
 - Continuous integration via GitHub Actions
 
-### Running test locally
+### Run test locally
 ```bash
 pytest
 ```
@@ -92,11 +120,12 @@ pytest
 - All solvers retur structures result objects containing: 
   - 'root'
   - 'converged'
-  - 'iterations'
+  - 'iterations' - which is stored for convergence analysis
   - 'history' of approximations
 - Convergence behaviour can be analysed programmatically 
-- Unified solver interface ('solve()') supports multiple algorithms
-- CI-tested using 'pytest' and GitHub Actions.
+- Unified solver interface ('solve()') supports multiple algorithms and explicitly implemented (with SciPy dependency)
+- CI-tested using 'pytest' and GitHub Actions
+- Emphasis on numerical stability and theoretical correctness
 
 ## Why This Project?
 
