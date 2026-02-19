@@ -23,7 +23,7 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 Where the order of convergence \(p\) is defined by:  
 
 $$
-p = \lim_{n \ to \infty}
+p = \lim_{n \to \infty}
 \frac{\log(e_{n+1}/e_n)}
 {\log(e_n/e_{n-1})}
 $$
@@ -163,9 +163,9 @@ $$
 x^2 - 2 = 0
 $$
 
-<p align="center">
-  <img src="docs/convergence.png" width="600"/>
-</p>
+<img src="docs/convergence.png"> width="600">
+
+*Absolte error vs iteration (log scale).*
 
 - Newton - faster near the root (quadratic) however, requires a derivative & a decent initial guess.
 - Bisection - guaranteed convergence when the root is bracketed, but slower (linear).
@@ -179,11 +179,7 @@ Run the benchmark
 ```bash
 python -m examples.benchmark_methods
 ``` 
-Example solving:
-
-$$
-x^2 - 2 = 0
-$$
+Example solving \( x^2 - 2 = 0 \)
 
 | Method     | Iterations | Final Error   | Time (s)  |
 |------------|------------|---------------|-----------|
