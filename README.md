@@ -4,9 +4,7 @@
 
 A small Python library implementing classical numerical methods for solving nonlinear equations:  
 
-$$
-f(x) = 0
-$$
+$f(x) = 0$
 
 Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis and algorithm design.
 ---
@@ -26,16 +24,14 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 
 The order of convergence \(p\) is defined by:
 
-$$
+$
 p = \lim_{n \to \infty}
 \frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}
-$$
+$
 
 where  
 
-$$
-e_n = |x_n - r|
-$$
+$e_n = |x_n - r|$
 
 ## Installation 
 ### Repository
@@ -162,9 +158,9 @@ python -m examples.plot_convergence
 ---
 Example convergence behaviour for solving:
 
-$$
+$
 x^2 - 2 = 0
-$$
+$
 
 ---
 <img src="docs/convergence.png"> width="600">
