@@ -3,9 +3,8 @@
 ![Tests](https://github.com/SKmodels/numerical-root-finder/actions/workflows/tests.yml/badge.svg)
 
 A small Python library implementing classical numerical methods for solving nonlinear equations:  
-```
-f(x) = 0
-```
+
+<p align="center" style="font-size: 1.1em;"><b>f</b>(<i>x</i>) = 0</p>
 
 Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis and algorithm design.
 ---
@@ -162,9 +161,8 @@ python -m examples.plot_convergence
 
 Example convergence behaviour for solving:
 
-```
-x^2 - 2 = 0
-```
+<p align="center" style="font-size: 1.1em;"><i>x</i><sup>2</sup> − 2 = 0</p>
+
 <img src="docs/convergence.png">
 
 *Absolte error vs iteration (log scale).*
