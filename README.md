@@ -24,14 +24,14 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 ### Definition of Convergence Order
 
 The order of convergence \(p\) is defined by:
-
-\(p = \lim_{n \to \infty}\frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}\)
-
+\\
+p = \lim_{n \to \infty}\frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}
+\\
 
 where
-
-\(e_n = |x_n - r|\)
-
+\\
+e_n = |x_n - r|
+\\
 ## Installation 
 ### Repository
 ```bash
