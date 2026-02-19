@@ -322,3 +322,80 @@ Root-finding is foundational to:
 - Machine learning
 
 This project was built as part of the **SKmodels** portfolio to develop deeper intuition for convergence theory, numerical stability, and algorithmic design.
+
+---
+
+## Project Roadmap
+
+This library is being developed as a progressively more advanced nonlinear solver toolkit, with emphasis on numerical stability, convergence theory, and scientific computing applications.
+
+### Phase 1 — Strengthen Nonlinear System Solvers
+
+- [ ] Implement **Broyden’s Method** (quasi-Newton for systems)
+  - Jacobian-free update
+  - Compare performance vs analytic Newton and finite-difference Newton
+- [ ] Add Jacobian diagnostics
+  - Condition number estimation
+  - Singular/near-singular detection
+  - Optional warnings for ill-conditioned systems
+- [ ] Improve line search strategy
+  - Parameter tuning exposure
+  - Optional Wolfe conditions
+- [ ] Expand system-level test coverage
+
+---
+
+### Phase 2 — Applied Nonlinear Modelling Examples
+
+Add real-world nonlinear systems to demonstrate solver robustness:
+
+- [ ] Curve/surface intersection problems
+- [ ] Chemical equilibrium equations
+- [ ] Nonlinear circuit equations
+- [ ] Mechanical equilibrium systems
+- [ ] Logistic map fixed points
+- [ ] Small nonlinear ODE shooting problem
+
+Goal: transition from abstract mathematical examples to applied computational modelling.
+
+---
+
+### Phase 3 — Higher-Dimensional & Performance Scaling
+
+- [ ] Benchmark scaling with dimension (n = 2 → 10+)
+- [ ] Compare analytic vs finite-difference Jacobian cost
+- [ ] Profile line search impact
+- [ ] Add structured performance reporting
+
+---
+
+### Phase 4 — Advanced Solver Techniques
+
+- [ ] Trust-region Newton methods
+- [ ] Sparse Jacobian support
+- [ ] Inexact Newton methods
+- [ ] Preconditioning strategies
+- [ ] Hybrid globalisation techniques
+
+---
+
+### Phase 5 — Scientific Computing Extensions
+
+- [ ] Link root-finding to optimisation frameworks
+- [ ] Extend toward nonlinear least squares
+- [ ] Add automatic differentiation support
+- [ ] Explore PDE-inspired nonlinear solves
+
+---
+
+## Long-Term Vision
+
+Develop this project into a compact but rigorous nonlinear solver framework suitable for:
+
+- Scientific computing
+- Computational physics
+- Numerical optimisation
+- Applied mathematics research
+- Scientific machine learning
+
+The goal is not just implementation, but demonstrable understanding of convergence theory, numerical stability, and algorithmic design.
