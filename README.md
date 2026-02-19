@@ -2,69 +2,100 @@
 
 ![Tests](https://github.com/SKmodels/numerical-root-finder/actions/workflows/tests.yml/badge.svg)
 
-A small Python library implementing classical numerical methods for solving nonlinear equations:  
+A lightweight Python library implementing classical numerical methods for solving nonlinear equations:
 
-<p align="center" style="font-size: 1.1em;"><b>f</b>(<i>x</i>) = 0</p>
+<p align="center"><b>f</b>(<i>x</i>) = 0</p>
 
-Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis and algorithm design.
+and nonlinear systems:
+
+<p align="center"><b>F</b>(<i>x</i>) = 0, &nbsp; x ∈ ℝⁿ</p>
+
+Part of the **SKmodels** portfolio focused on scientific computing, numerical analysis, and algorithm design.
+
 ---
+
+## Features
+
+- Scalar root-finding (bracketing and open methods)
+- Multidimensional Newton solver for nonlinear systems
+- Optional analytic or finite-difference Jacobians
+- Armijo-style backtracking line search
+- Convergence tracking and benchmarking
+- Unified solver interface
+- Fully tested with CI (pytest + GitHub Actions)
+
+---
+
 ## Implemented Methods
-- **Newton-Raphson** (1D) - Quadratic convergence (order 2)
-- **Bisection** - Guaranteed convergence (linear order 1)
-- **Secant** - Superlinear convergence (~1.618)
-- **Brent's Method** - Hybrid bracketing + Interpolation (robust and fast)
-- **Multidimensional Newton Systems** 
-- **Optional Analytic or Finite-difference Jacobians**
-- **Backtracking Line search**
-- **Convergence Tracking**
 
-## Convergence Properties
-- Newton - Derivative-based - Quadratics (p ~ 2)  
-- Bisection - Bracketing (Robust) - Linear (p ~ 1)  
-- Secant - Derivative-free - Superlinear (p ~ 1.618)  
-- Brent's - Bracketing (robust) + inverse quadratic interpolation/secant (fast), with bisection fallback to guarantee convergence
+- **Newton–Raphson (1D)** — quadratic convergence (order ≈ 2)
+- **Bisection** — guaranteed linear convergence (order ≈ 1)
+- **Secant** — superlinear convergence (order ≈ 1.618)
+- **Brent’s Method** — robust hybrid bracketing/interpolation
+- **Multidimensional Newton (Systems)**
 
-### Definition of Convergence Order
+---
 
-The order of convergence \(p\) is defined by:
+## Convergence Theory
+
+### Order of Convergence
+
+The order of convergence \( p \) is defined as:
 
 <p align="center">
-  <b>p</b> = lim<sub>n → ∞</sub>
-  log(e<sub>n+1</sub> / e<sub>n</sub>) /
-  log(e<sub>n</sub> / e<sub>n−1</sub>)
+<b>p</b> =
+lim<sub>n → ∞</sub>
+log(e<sub>n+1</sub> / e<sub>n</sub>)
+/
+log(e<sub>n</sub> / e<sub>n−1</sub>)
 </p>
 
 where
 
 <p align="center">
-  e<sub>n</sub> = |x<sub>n</sub> − r|
+e<sub>n</sub> = |x<sub>n</sub> − r|
 </p>
 
-## Installation 
-### Repository
+Different methods exhibit different convergence behaviour depending on smoothness assumptions and derivative availability.
+
+---
+
+## Installation
+
+### Clone the Repository
+
 ```bash
 git clone https://github.com/SKmodels/numerical-root-finder.git
 cd numerical-root-finder
 ```
-### Install runtime dependencies 
+
+### Install Runtime Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
-### Install development dependencies
+
+### Install Development Dependencies
+
 ```bash
-pip install -r requirements-dev.txt 
+pip install -r requirements-dev.txt
 ```
 
-## Example usage
+---
 
-To run each method;
+## Example Usage
+
+Run example scripts from the project root:
 
 ```bash
 python -m examples.[name]_usage
 ```
-### Newton-Raphson method
 
-```python 
+---
+
+### Newton–Raphson (1D)
+
+```python
 from methods.newton import newton_method
 
 f = lambda x: x**2 - 2
@@ -75,7 +106,10 @@ result = newton_method(f, df, x0=1.5)
 print("Root:", result.root)
 print("Converged:", result.converged)
 ```
-### Multidimensional Newton System
+
+---
+
+### Multidimensional Newton (Systems)
 
 ```python
 import numpy as np
@@ -105,7 +139,26 @@ res = solve_system(
 print("Root:", res.root)
 print("Converged:", res.converged)
 ```
-### Bisection method
+
+This example computes the intersection of the unit circle and the line \( x = y \).
+
+The solver computes updates by solving:
+
+```
+J(x_k) Δx_k = -F(x_k)
+```
+
+and updates:
+
+```
+x_{k+1} = x_k + α Δx_k
+```
+
+where \( α \) is determined via Armijo-style backtracking line search.
+
+---
+
+### Bisection Method
 
 ```python
 from methods.bisection import bisection_method
@@ -117,7 +170,11 @@ result = bisection_method(f, a=1.0, b=2.0)
 print("Root:", result.root)
 print("Converged:", result.converged)
 ```
-### Secant method
+
+---
+
+### Secant Method
+
 ```python
 from methods.secant import secant_method
 
@@ -129,7 +186,11 @@ print("Root:", result.root)
 print("Iterations:", result.iterations)
 print("Converged:", result.converged)
 ```
-### Brent's method
+
+---
+
+### Brent’s Method
+
 ```python
 from methods.brent import brent_method
 
@@ -141,144 +202,123 @@ print("Root:", result.root)
 print("Iterations:", result.iterations)
 print("Converged:", result.converged)
 ```
-### Convergence plot
-```python
-import math
-import matplotlib.pyplot as plt
-from pathlib import Path
 
-from methods.bisection import bisection_method
-from methods.newton import newton_method
-from methods.brent import brent_method
-from methods.secant import secant_method
-true_root = math.sqrt(2)
+---
 
-f = lambda x: x**2 - 2
-df = lambda x: 2 * x
-
-newton = newton_method(f, df, x0=1.5)
-bisect = bisection_method(f, a=1.0, b=2.0)
-brent = brent_method(f, a=1.0, b=2.0)
-secant = secant_method(f, x0=1.0, x1=2.0)
-
-newton_err = [abs(x - true_root) for x in newton.history]
-bisect_err = [abs(x - true_root) for x in bisect.history]
-brent_err = [abs(x - true_root) for x in brent.history]
-secant_err = [abs(x - true_root) for x in secant.history]
-
-plt.figure()
-plt.semilogy(newton_err, marker="o", label="Newton")
-plt.semilogy(bisect_err, marker="o", label="Bisection")
-plt.semilogy(brent_err, marker="o", label="Brent")
-plt.semilogy(secant_err, marker="o", label="Secant")
-
-plt.xlabel("Iteration")
-plt.ylabel("Absolute Error |x - sqrt(2)|")
-plt.title("Convergence Comparison")
-plt.legend()
-plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-plt.tight_layout()
-
-project_root = Path(__file__).resolve().parents[1]
-docs_path = project_root / "docs"
-docs_path.mkdir(exist_ok=True)
-
-out_file = docs_path / "convergence.png"
-plt.savefig(out_file, dpi=300, bbox_inches="tight")
-plt.show()
-```
 ## Convergence Comparison
 
-Run the comparison
+Run:
 
 ```bash
 python -m examples.plot_convergence
 ```
 
-Example convergence behaviour for solving:
+Example solving:
 
-<p align="center" style="font-size: 1.1em;"><i>x</i><sup>2</sup> − 2 = 0</p>
+<p align="center"><i>x</i><sup>2</sup> − 2 = 0</p>
 
 <img src="docs/convergence.png">
 
-*Absolte error vs iteration (log scale).*
+*Absolute error vs iteration (log scale).*
 
-- Newton - faster near the root (quadratic) however, requires a derivative & a decent initial guess.
-- Bisection - guaranteed convergence when the root is bracketed, but slower (linear).
-- Secant - derivative-free & usually faster than bisection (superlinear), but not guaranteed convergence.
-- Brent's method - achieves near-Newton speed while retaining bisection robustness.
+- **Newton** — quadratic convergence near the root (requires derivative & good initial guess).
+- **Bisection** — guaranteed convergence when bracketing a root.
+- **Secant** — derivative-free and typically faster than bisection.
+- **Brent’s method** — near-Newton speed with bracketing robustness.
+
+---
 
 ## Performance Benchmark
- 
-Run the benchmark
+
+Run:
 
 ```bash
 python -m examples.benchmark_methods
-``` 
-Example solving \( x^2 - 2 = 0 \)
+```
 
-| Method     | Iterations | Final Error   | Time (s)  |
-|------------|------------|---------------|-----------|
-| Newton     | 4          | 0.00e+00      | 0.000014  |
-| Secant     | 6          | 2.22e-16      | 0.000007  |
-| Bisection  | 27         | 1.85e-09      | 0.000012  |
-| Brent      | 5          | 4.17e-14      | 0.000028  |
-  
+Example for solving \( x^2 - 2 = 0 \):
+
+| Method     | Iterations | Final Error | Time (s)  |
+|------------|------------|-------------|-----------|
+| Newton     | 4          | 0.00e+00    | 0.000014  |
+| Secant     | 6          | 2.22e-16    | 0.000007  |
+| Bisection  | 27         | 1.85e-09    | 0.000012  |
+| Brent      | 5          | 4.17e-14    | 0.000028  |
+
+---
 
 ## Unified Solver Interface
 
-- The solve() function provides a unified interface:
+Scalar problems:
 
 ```python
 from methods.solver import solve
 
 result = solve(
-  method="secant",
-  f=lambda x: x**2 - 2,
-  x0=1.0
-  x1=2.0
+    method="secant",
+    f=lambda x: x**2 - 2,
+    x0=1.0,
+    x1=2.0
+)
+
+print(result.root)
+```
+
+Multidimensional systems:
+
+```python
+from methods.solver import solve_system
+
+result = solve_system(
+    method="newton",
+    F=F,
+    x0=[0.8, 0.6],
+    jac=J
 )
 ```
-### Using solve() for Multidimensional Newton Systems
-```python
-The solver computes updates by solving:
 
-    J(x_k) Δx_k = -F(x_k)
+---
 
-and updates:
-
-    x_{k+1} = x_k + α Δx_k
-
-where α is determined by an Armijo-style backtracking line search.
-```
-
-## Testing & CI
+## Testing & Continuous Integration
 
 All methods are validated using:
 
-- Analytical convergence order estimation
+- Known closed-form roots (e.g., √2 benchmark)
+- Convergence order estimation
 - Bracket shrink guarantees (bisection)
-- Known closed-form roots (sqrt(2) example)
+- Multidimensional system verification
 - Continuous integration via GitHub Actions
 
-### Run test locally
+Run tests locally:
+
 ```bash
 pytest
 ```
-## Design Philosophy 
 
-- All solvers retur structures result objects containing: 
-  - 'root'
-  - 'converged'
-  - 'iterations' - which is stored for convergence analysis
-  - 'history' of approximations
-- Convergence behaviour can be analysed programmatically 
-- Unified solver interface ('solve()') supports multiple algorithms and explicitly implemented (with SciPy dependency)
-- CI-tested using 'pytest' and GitHub Actions
+---
+
+## Design Philosophy
+
+- All solvers return structured result objects containing:
+  - `root`
+  - `converged`
+  - `iterations`
+  - `history` of approximations
+- Convergence behaviour can be analysed programmatically
+- Unified solver interface (`solve()` / `solve_system()`)
 - Emphasis on numerical stability and theoretical correctness
+- Minimal dependencies
+
+---
 
 ## Why This Project?
 
-Root-finding is a foundational problem in scientific computing, numerical analysis, optimisation and machine learning.
+Root-finding is foundational to:
 
-This project was built as part of the SKmodels portfolio to develop a deeper understanding of numerical stability, convergence theory and algorithmic design. 
+- Scientific computing
+- Numerical analysis
+- Optimisation
+- Computational physics
+- Machine learning
+
+This project was built as part of the **SKmodels** portfolio to develop deeper intuition for convergence theory, numerical stability, and algorithmic design.
