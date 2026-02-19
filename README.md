@@ -3,7 +3,7 @@
 ![Tests](https://github.com/SKmodels/numerical-root-finder/actions/workflows/tests.yml/badge.svg)
 
 A small Python library implementing classical numerical methods for solving nonlinear equations:  
-```math
+```
 f(x) = 0
 ```
 
