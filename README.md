@@ -25,12 +25,17 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 
 The order of convergence \(p\) is defined by:
 ```
-p = \lim_{n \to \infty}\frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}
+<p align="center">
+  <b>p</b> = lim<sub>n → ∞</sub>
+  log(e<sub>n+1</sub> / e<sub>n</sub>) /
+  log(e<sub>n</sub> / e<sub>n−1</sub>)
+</p>
 ```
-
 where
 ```
-e_n = |x_n - r|
+<p align="center">
+  e<sub>n</sub> = |x<sub>n</sub> − r|
+</p>
 ```
 ## Installation 
 ### Repository
