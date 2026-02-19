@@ -24,7 +24,7 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 ### Definition of Convergence Order
 
 The order of convergence \(p\) is defined by:
-```
+```html
 <p align="center">
   <b>p</b> = lim<sub>n → ∞</sub>
   log(e<sub>n+1</sub> / e<sub>n</sub>) /
@@ -32,7 +32,7 @@ The order of convergence \(p\) is defined by:
 </p>
 ```
 where
-```
+```html
 <p align="center">
   e<sub>n</sub> = |x<sub>n</sub> − r|
 </p>
