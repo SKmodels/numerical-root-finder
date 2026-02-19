@@ -20,6 +20,7 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 - Bisection - Bracketing (Robust) - Linear (p ~ 1)  
 - Secant - Derivative-free - Superlinear (p ~ 1.618)  
 - Newton - Derivative-based - Quadratics (p ~ 2)  
+- Brent's - Bracketing (robust) + inverse quadratic interpolation/secant (fast), with bisection fallback to guarantee convergence
 
 Where the order of convergence \(p\) is defined by:  
 
