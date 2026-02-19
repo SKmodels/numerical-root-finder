@@ -47,6 +47,12 @@ pip install -r requirements-dev.txt
 ```
 
 ## Example usage
+
+To run each method;
+
+```bash
+python -m [name]_usage
+```
 ### Newton-Raphson method
 ```python 
 from methods.newton import newton_method
@@ -142,6 +148,11 @@ def main() -> None:
 ```
 ## Convergence Comparison
 
+Run the comparison
+
+```bash
+python -m examples.plot_convergence
+```
 Example convergence behaviour for solving:
 
 $$x^2 - 2 = 0$$
@@ -156,7 +167,12 @@ $$x^2 - 2 = 0$$
 - Brent's method - achieves near-Newton speed while retaining bisection robustness.
 
 ## Performance Benchmark
+ 
+Run the benchmark
 
+```bash
+python -m examples.benchmark_methods
+``` 
 Example solving $$x^2 - 2 = 0$$
 
 | Method     | Iterations | Final Error   | Time (s)  |
