@@ -3,7 +3,7 @@
 ![Tests](https://github.com/SKmodels/numerical-root-finder/actions/workflows/tests.yml/badge.svg)
 
 A small Python library implementing classical numerical methods for solving nonlinear equations:  
-```
+```math
 f(x) = 0
 ```
 
@@ -24,14 +24,14 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 ### Definition of Convergence Order
 
 The order of convergence \(p\) is defined by:
-\\
+```
 p = \lim_{n \to \infty}\frac{\log(e_{n+1}/e_n)}{\log(e_n/e_{n-1})}
-\\
+```
 
 where
-\\
+```
 e_n = |x_n - r|
-\\
+```
 ## Installation 
 ### Repository
 ```bash
@@ -157,7 +157,7 @@ python -m examples.plot_convergence
 
 Example convergence behaviour for solving:
 
-```bash
+```
 x^2 - 2 = 0
 ```
 <img src="docs/convergence.png">
