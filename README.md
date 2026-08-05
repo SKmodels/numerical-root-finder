@@ -300,10 +300,10 @@ pytest
 ## Design Philosophy
 
 - All solvers return structured result objects containing:
-  - `root`
-  - `converged`
-  - `iterations`
-  - `history` of approximations
+  - the computed `root`
+  - convergence status
+  - iteration count
+  - method-appropriate convergence history and diagnostics
 - Convergence behaviour can be analysed programmatically
 - Unified solver interface (`solve()` / `solve_system()`)
 - Emphasis on numerical stability and theoretical correctness
