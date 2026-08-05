@@ -37,7 +37,10 @@ def secant_method(
         Absolute convergence tolerance.
     max_iter : int, optional
         Maximum number of iterations.
-
+    min_denom : float, optional
+    Minimum permitted absolute secant denominator. The solver stops
+    without convergence when the denominator falls below this value.
+    
     Returns
     -------
     SecantResult

@@ -112,6 +112,14 @@ def newton_system(
         supplied.
     fd_eps : float, optional
         Perturbation size for finite differences.
+    alpha0 : float, optional
+        Initial step length used by the line search.
+    c1 : float, optional
+        Sufficient-decrease constant for the Armijo condition.
+    ls_shrink : float, optional
+        Factor by which the step length is reduced during backtracking.
+    ls_max_steps : int, optional
+        Maximum number of backtracking reductions per Newton iteration.
 
     Returns
     -------

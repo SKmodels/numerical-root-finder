@@ -9,12 +9,12 @@ def estimate_order(errors: List[float], eps: float = 1e-14) -> float:
     ----------
     errors : Sequence[float]
         Sequence of successive approximation errors.
+    eps : float, optional
+        Threshold below which error values are discarded before estimating
+        the convergence order.
 
     Returns
     -------
-    float
-        Estimated convergence order.
-
     float
         Estimated convergence order.
 
