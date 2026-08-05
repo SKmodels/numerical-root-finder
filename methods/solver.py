@@ -5,7 +5,7 @@ from methods.newton import newton_method
 from methods.secant import secant_method
 from methods.brent import brent_method
 
-from methods.newton_system import newton_system  # NEW
+from methods.newton_system import newton_system 
 
 
 def solve(
