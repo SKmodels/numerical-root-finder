@@ -1,0 +1,16 @@
+[project]
+name = "numerical-root-finder"
+version = "1.0.0"
+description = "Numerical methods for scalar and multidimensional nonlinear root finding."
+readme = "README.md"
+license = {text = "MIT"}
+
+authors = [
+    {name = "Sayf Khan"}
+]
+
+requires-python = ">=3.11"
+
+dependencies = [
+    "numpy",
+]
