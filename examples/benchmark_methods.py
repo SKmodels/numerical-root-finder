@@ -1,10 +1,10 @@
 import math
 import time
 
-from methods.bisection import bisection_method
-from methods.brent import brent_method 
-from methods.secant import secant_method
-from methods.newton import newton_method
+from numerical_root_finder import bisection_method
+from numerical_root_finder import brent_method 
+from numerical_root_finder import secant_method
+from numerical_root_finder import newton_method
 
 def benchmark():
     f = lambda x: x**2 - 2

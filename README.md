@@ -96,7 +96,7 @@ python -m examples.[name]_usage
 ### Newton–Raphson (1D)
 
 ```python
-from methods.newton import newton_method
+from numerical_root_finder import newton_method
 
 f = lambda x: x**2 - 2
 df = lambda x: 2*x
@@ -113,7 +113,7 @@ print("Converged:", result.converged)
 
 ```python
 import numpy as np
-from methods.solver import solve_system
+from numerical_root_finder import solve_system
 
 def F(v):
     x, y = v
@@ -161,7 +161,7 @@ where \( α \) is determined via Armijo-style backtracking line search.
 ### Bisection Method
 
 ```python
-from methods.bisection import bisection_method
+from numerical_root_finder import bisection_method
 
 f = lambda x: x**2 - 2
 
@@ -176,7 +176,7 @@ print("Converged:", result.converged)
 ### Secant Method
 
 ```python
-from methods.secant import secant_method
+from numerical_root_finder import secant_method
 
 f = lambda x: x**2 - 2
 
@@ -192,7 +192,7 @@ print("Converged:", result.converged)
 ### Brent’s Method
 
 ```python
-from methods.brent import brent_method
+from numerical_root_finder import brent_method
 
 f = lambda x: x**2 - 2
 
@@ -252,7 +252,7 @@ Example for solving \( x^2 - 2 = 0 \):
 Scalar problems:
 
 ```python
-from methods.solver import solve
+from numerical_root_finder import solve
 
 result = solve(
     method="secant",
@@ -267,7 +267,7 @@ print(result.root)
 Multidimensional systems:
 
 ```python
-from methods.solver import solve_system
+from numerical_root_finder import solve_system
 
 result = solve_system(
     method="newton",

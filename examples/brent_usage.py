@@ -1,5 +1,5 @@
 import math
-from methods.brent import brent_method
+from numerical_root_finder import brent_method
 
 def main():
     f = lambda x: x**2 - 2

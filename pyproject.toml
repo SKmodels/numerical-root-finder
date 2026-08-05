@@ -21,5 +21,8 @@ Homepage = "https://github.com/SKmodels/numerical-root-finder"
 Repository = "https://github.com/SKmodels/numerical-root-finder"
 Issues = "https://github.com/SKmodels/numerical-root-finder/issues"
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
 [tool.setuptools.packages.find]
-include = ["methods*"]
+where = ["src"]

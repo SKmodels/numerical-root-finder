@@ -1,6 +1,6 @@
 import math
 
-from methods.secant import secant_method
+from numerical_root_finder import secant_method
 
 def test_secant_sqrt2():
     f = lambda x: x**2 - 2

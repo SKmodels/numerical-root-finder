@@ -1,5 +1,5 @@
 import math 
-from methods.bisection import bisection_method
+from numerical_root_finder import bisection_method
 
 def main():
     f = lambda x: x**2 - 2

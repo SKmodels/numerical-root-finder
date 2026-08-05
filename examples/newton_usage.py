@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass 
 from typing import Callable, List
-from methods.newton import newton_method
+from numerical_root_finder import newton_method
 
 Number = float
 Func = Callable[[Number], Number]

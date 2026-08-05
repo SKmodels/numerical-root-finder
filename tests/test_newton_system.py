@@ -1,8 +1,8 @@
 # tests/test_newton_system.py
 import numpy as np
 
-from methods.newton_system import newton_system
-from methods.solver import solve_system
+from numerical_root_finder import newton_system
+from numerical_root_finder.solver import solve_system
 
 def test_newton_system_converges_with_analytic_jacobian():
     def F(v: np.ndarray) -> np.ndarray:

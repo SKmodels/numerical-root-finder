@@ -1,5 +1,5 @@
 import math
-from methods.newton import newton_method
+from numerical_root_finder import newton_method
 
 def test_newton_sqrt2():
     f = lambda x: x**2 - 2

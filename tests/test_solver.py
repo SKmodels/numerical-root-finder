@@ -1,5 +1,5 @@
 import math
-from methods.solver import solve
+from numerical_root_finder import solve
 import pytest
 
 def test_solve_newton():

@@ -1,11 +1,11 @@
 from typing import Callable, Optional, Sequence
 
-from methods.bisection import bisection_method
-from methods.newton import newton_method
-from methods.secant import secant_method
-from methods.brent import brent_method
-
-from methods.newton_system import newton_system 
+from .bisection import bisection_method
+from .brent import brent_method
+from .newton import newton_method
+from .newton_system import newton_system
+from .secant import secant_method
+from .newton_system import newton_system 
 
 
 def solve(

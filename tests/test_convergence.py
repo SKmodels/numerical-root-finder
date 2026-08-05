@@ -1,8 +1,8 @@
 import math 
-from methods.bisection import bisection_method
-from methods.newton import newton_method
-from methods.secant import secant_method
-from methods.convergence import estimate_order
+from numerical_root_finder import bisection_method
+from numerical_root_finder import newton_method
+from numerical_root_finder import secant_method
+from numerical_root_finder.convergence import estimate_order
 
 def test_convergence_orders():
     true_root = math.sqrt(2)

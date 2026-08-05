@@ -1,6 +1,6 @@
 # examples/newton_system_usage.py
 import numpy as np
-from methods.newton_system import newton_system
+from numerical_root_finder import newton_system
 
 
 def F(v: np.ndarray) -> np.ndarray:

@@ -1,7 +1,7 @@
 import math 
 import pytest
 
-from methods.bisection import bisection_method
+from numerical_root_finder import bisection_method
 
 def test_bisection_sqrt2():
     f = lambda x: x**2 - 2
