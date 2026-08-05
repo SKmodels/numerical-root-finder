@@ -1,8 +1,28 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environments
 .venv/
-__pychache__/
+venv/
+
+# Test cache
+.pytest_cache/
+
+# Build artefacts
+*.egg-info/
+build/
+dist/
+
+# Coverage
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+
 *.pyc
 *.pyo
 *.pyd
-.vscode/
 TEMP/
 TEMP

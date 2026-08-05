@@ -1,16 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "numerical-root-finder"
 version = "1.0.0"
 description = "Numerical methods for scalar and multidimensional nonlinear root finding."
 readme = "README.md"
-license = {text = "MIT"}
-
-authors = [
-    {name = "Sayf Khan"}
-]
-
 requires-python = ">=3.11"
-
-dependencies = [
-    "numpy",
+license = { text = "MIT" }
+authors = [
+    { name = "Sayf Khan" }
 ]
+dependencies = [
+    "numpy"
+]
+
+[project.urls]
+Homepage = "https://github.com/SKmodels/numerical-root-finder"
+Repository = "https://github.com/SKmodels/numerical-root-finder"
+Issues = "https://github.com/SKmodels/numerical-root-finder/issues"
+
+[tool.setuptools.packages.find]
+include = ["methods*"]
