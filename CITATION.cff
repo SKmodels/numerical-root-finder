@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: numerical-root-finder
+message: "If you use this software, please cite it using the metadata below."
+type: software
+
+authors:
+  - family-names: Khan
+    given-names: Sayf
+
+repository-code: https://github.com/SKmodels/numerical-root-finder
+
+license: MIT
+
+version: 1.0.0
+
+date-released: 2026-08-05
