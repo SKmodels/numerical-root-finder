@@ -36,7 +36,7 @@ def newton_method(
         Absolute tolerance applied to the difference between successive
         approximations.
     max_iter : int, optional
-        Maximum number of iterations.
+        Maximum number of Newton iterations.
     min_derivative : float, optional
         Minimum permitted absolute derivative value. The solver stops
         without convergence when ``abs(df(x))`` falls below this value.
