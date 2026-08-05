@@ -60,25 +60,30 @@ Different methods exhibit different convergence behaviour depending on smoothnes
 
 ---
 
-## Installation
+## Getting Started
 
-### Clone the Repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/SKmodels/numerical-root-finder.git
 cd numerical-root-finder
 ```
 
-### Install Runtime Dependencies
+### Install the package
 
 ```bash
-pip install -r requirements.txt
+python -m pip install .
 ```
 
-### Install Development Dependencies
+This installs the package together with all required runtime dependencies specified in `pyproject.toml`.
+
+### Development setup
+
+For contributors, install the package in editable mode together with the development dependencies:
 
 ```bash
-pip install -r requirements-dev.txt
+python -m pip install -e .
+python -m pip install -r requirements-dev.txt
 ```
 
 ---

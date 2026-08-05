@@ -100,6 +100,14 @@ def solve_system(
         Initial approximation.
     jac : Callable, optional
         Analytic Jacobian.
+    tol_f : float, optional
+        Convergence tolerance applied to the residual norm.
+    tol_x : float, optional
+        Convergence tolerance applied to the Newton step norm.
+    max_iter : int, optional
+        Maximum number of iterations.
+    line_search : bool, optional
+        Whether to use Armijo-style backtracking line search.
 
     Returns
     -------
