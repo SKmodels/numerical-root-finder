@@ -29,25 +29,29 @@ def newton_method(
     f : Callable[[float], float]
         Scalar function for which a root is sought.
     df : Callable[[float], float]
-        Derivative of the function ``f``.
+        Derivative of ``f``.
     x0 : float
-        Initial guess for the root.
+        Initial approximation to the root.
     tol : float, optional
-        Absolute convergence tolerance for successive iterates.
+        Absolute tolerance applied to the difference between successive
+        approximations.
     max_iter : int, optional
-        Maximum number of Newton iterations.
+        Maximum number of iterations.
+    min_derivative : float, optional
+        Minimum permitted absolute derivative value. The solver stops
+        without convergence when ``abs(df(x))`` falls below this value.
 
-    Returns 
+    Returns
     -------
     NewtonResult
-        Structured result containing the computed root, convergence
-        status, iteration count, and history of approximations.
+        Result containing the root approximation, number of completed
+        iterations, convergence status, and approximation history.
 
     Notes
     -----
-    Newton's method exhibits quadratic convergence near a simple root,
-    provided that the initial guess is sufficiently close and the
-    derivative is non-zero.
+    Newton's method is locally quadratically convergent near a simple
+    root when the derivative is non-zero and the initial approximation
+    is sufficiently close to the root.
     """
     x = float(x0)
     history: List[float] = [x]
