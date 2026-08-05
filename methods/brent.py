@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Callable, List
 
-@dataclass
+@dataclass(frozen=True)
 class BrentResult:
     root: float
     iterations: int
@@ -23,7 +23,7 @@ def brent_method(
     Requirements
     - f(a) and f(b) must have opposite signs (i.e. bracket a root).
     """
-    
+
     fa = f(a)
     fb = f(b)
     if fa * fb > 0:
