@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from logging import root
 from typing import Callable, List
 
 Number = float
@@ -40,7 +41,7 @@ def bisection_method(
 
     history: List[float] = []
     left, right = a, b
-    fleft, fright = fa, fb
+    fleft = fa
     root = (left + right) / 2.0
     
     for k in range(1, max_iter + 1):
@@ -56,7 +57,6 @@ def bisection_method(
         # Keep the subinterval that contains the root
         if fm * fleft < 0:
             right = root
-            fright = fm
         else:
             left = root
             fleft = fm
