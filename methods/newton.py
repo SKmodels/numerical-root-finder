@@ -12,6 +12,7 @@ class NewtonResult:
     converged: bool
     history: List[float]
 
+
 def newton_method(
     f: Func,
     df: Func,

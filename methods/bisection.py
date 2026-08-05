@@ -16,6 +16,7 @@ class BisectionResult:
     a_final: float
     b_final: float
 
+
 def bisection_method(
     f: Func,
     a: float,
