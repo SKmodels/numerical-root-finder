@@ -332,7 +332,7 @@ This library is being developed as a progressively more advanced nonlinear solve
 ### Phase 1 — Strengthen Nonlinear System Solvers
 
 - [ ] Implement **Broyden’s Method** (quasi-Newton for systems)
-  - Jacobian-free update
+  - Quasi-Newton Jacobian approximation
   - Compare performance vs analytic Newton and finite-difference Newton
 - [ ] Add Jacobian diagnostics
   - Condition number estimation
