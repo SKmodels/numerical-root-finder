@@ -1,5 +1,6 @@
 from .bisection import BisectionResult, bisection_method
 from .brent import BrentResult, brent_method
+from .broyden import BroydenResult, broyden_system
 from .newton import NewtonResult, newton_method
 from .newton_system import (
     NewtonSystemResult,
@@ -23,4 +24,6 @@ __all__ = [
     "secant_method",
     "solve",
     "solve_system",
+    "BroydenResult",
+    "broyden_system",
 ]

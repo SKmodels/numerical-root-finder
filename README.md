@@ -23,6 +23,7 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 - Convergence tracking and benchmarking
 - Unified solver interface
 - Fully tested with CI (pytest + GitHub Actions)
+- Broyden’s quasi-Newton method for nonlinear systems
 
 ---
 
@@ -33,6 +34,7 @@ Part of the **SKmodels** portfolio focused on scientific computing, numerical an
 - **Secant** — superlinear convergence (order ≈ 1.618)
 - **Brent’s Method** — robust hybrid bracketing/interpolation
 - **Multidimensional Newton (Systems)**
+- **Broyden’s Method (Systems)** — quasi-Newton method using rank-one Jacobian updates
 
 ---
 
@@ -163,6 +165,58 @@ where \( α \) is determined via Armijo-style backtracking line search.
 
 ---
 
+### Broyden’s Method (Systems)
+
+```python
+import numpy as np
+
+from numerical_root_finder import broyden_system
+
+
+def F(v):
+    x, y = v
+    return np.array([
+        x**2 + y**2 - 1.0,
+        x - y,
+    ])
+
+
+result = broyden_system(
+    F=F,
+    x0=[0.8, 0.6],
+)
+
+print("Root:", result.root)
+print("Converged:", result.converged)
+print("Iterations:", result.iterations)
+```
+
+Output:
+
+```text
+Root: [0.70710678 0.70710678]
+Converged: True
+Iterations: 4
+```
+
+Broyden’s method begins with an analytic or finite-difference Jacobian approximation and updates it after each accepted step using a rank-one correction:
+
+```text
+B_(k+1) = B_k + ((y_k - B_k s_k) s_k^T) / (s_k^T s_k)
+```
+
+where:
+
+```text
+s_k = x_(k+1) - x_k
+y_k = F(x_(k+1)) - F(x_k)
+```
+
+Unlike Newton’s method, Broyden’s method does not recompute the full Jacobian at every iteration.
+'''
+
+---
+
 ### Bisection Method
 
 ```python
@@ -252,6 +306,27 @@ Example for solving \( x^2 - 2 = 0 \):
 
 ---
 
+## System Solver Benchmark
+
+Run:
+
+```bash
+python -m examples.benchmark_system_methods
+```
+
+Example output:
+
+| Method | Iterations | Residual Norm | Time (s) |
+|---------|-----------:|--------------:|---------:|
+| Newton | 4 | 2.22e−16 | 0.0000xx |
+| Broyden | 4 | 1.31e−11 | 0.0000xx |
+
+Newton recomputes the Jacobian at each iteration and therefore typically achieves faster local convergence when derivatives are available.
+
+Broyden instead updates an approximate Jacobian using a rank-one correction, avoiding repeated Jacobian evaluations and making it attractive when Jacobians are expensive to compute.
+
+---
+
 ## Unified Solver Interface
 
 Scalar problems:
@@ -274,11 +349,17 @@ Multidimensional systems:
 ```python
 from numerical_root_finder import solve_system
 
-result = solve_system(
+newton_result = solve_system(
     method="newton",
     F=F,
     x0=[0.8, 0.6],
-    jac=J
+    jac=J,
+)
+
+broyden_result = solve_system(
+    method="broyden",
+    F=F,
+    x0=[0.8, 0.6],
 )
 ```
 
@@ -336,9 +417,11 @@ This library is being developed as a progressively more advanced nonlinear solve
 
 ### Phase 1 — Strengthen Nonlinear System Solvers
 
-- [ ] Implement **Broyden’s Method** (quasi-Newton for systems)
+- [x] Implement **Broyden’s Method**
   - Quasi-Newton Jacobian approximation
-  - Compare performance vs analytic Newton and finite-difference Newton
+  - Analytic or finite-difference initial Jacobian
+  - Armijo-style backtracking line search
+  - Tested through the unified `solve_system()` interface
 - [ ] Add Jacobian diagnostics
   - Condition number estimation
   - Singular/near-singular detection

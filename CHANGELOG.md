@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Added
+
+- Broyden’s good method for square nonlinear systems.
+- Analytic or finite-difference initial Jacobian support.
+- Rank-one Jacobian approximation updates.
+- Armijo-style backtracking line search.
+- Public `broyden_system()` API.
+- Broyden support through `solve_system(method="broyden", ...)`.
+- Dedicated Broyden tests and usage example.
+
 ### Changed
 
 - Adopted a `src` package layout.

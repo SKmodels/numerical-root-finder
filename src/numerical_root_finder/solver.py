@@ -5,6 +5,7 @@ from .brent import brent_method
 from .newton import newton_method
 from .newton_system import newton_system
 from .secant import secant_method
+from .broyden import broyden_system
 
 
 def solve(
@@ -93,7 +94,8 @@ def solve_system(
     Parameters
     ----------
     method : str
-        Name of the solver. Currently only ``"newton"`` is supported.
+        Name of the system solver. Supported values are ``"newton"``
+        and ``"broyden"``.
     F : Callable[[np.ndarray], np.ndarray]
         Vector-valued nonlinear function.
     x0 : ArrayLike
@@ -111,8 +113,8 @@ def solve_system(
 
     Returns
     -------
-    NewtonSystemResult
-        Structured result returned by the multidimensional Newton solver.
+    NewtonSystemResult | BroydenResult
+        Result object corresponding to the selected system solver.
 
     Raises
     ------
@@ -123,7 +125,18 @@ def solve_system(
 
     if method == "newton":
         return newton_system(
-            F,
+            F=F,
+            x0=x0,
+            jac=jac,
+            tol_f=tol_f,
+            tol_x=tol_x,
+            max_iter=max_iter,
+            line_search=line_search,
+        )
+
+    if method == "broyden":
+        return broyden_system(
+            F=F,
             x0=x0,
             jac=jac,
             tol_f=tol_f,
@@ -133,5 +146,6 @@ def solve_system(
         )
 
     raise ValueError(
-        f"Unknown system method: {method}. Choose 'newton'."
+        f"Unknown system method: {method}. "
+        "Choose 'newton' or 'broyden'."
     )
