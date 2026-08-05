@@ -13,6 +13,7 @@ class SecantResult:
     converged: bool
     history: List[float]
 
+
 def secant_method(
     f: Func,
     x0: float,

@@ -10,6 +10,7 @@ class BrentResult:
     a_final: float
     b_final: float
 
+
 def brent_method(
     f: Callable[[float], float],
     a: float,
