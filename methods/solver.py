@@ -20,7 +20,36 @@ def solve(
     max_iter: int = 50,
 ):
     """
-    Solve a scalar root-finding problem f(x)=0 using the specified method.
+    Solve a scalar nonlinear equation using the selected numerical method.
+
+    Parameters
+    ----------
+    method : str
+        Name of the numerical method to use. Supported values are
+        ``"newton"``, ``"secant"``, ``"bisection"``, and ``"brent"``.
+    f : Callable[[float], float]
+        Scalar function.
+    df : Callable[[float], float], optional
+        Derivative of ``f`` when required.
+    x0, x1 : float, optional
+        Initial guesses.
+    a, b : float, optional
+        Initial bracketing interval.
+    tol : float, optional
+        Convergence tolerance.
+    max_iter : int, optional
+        Maximum number of iterations.
+
+    Returns
+    -------
+    NewtonResult | SecantResult | BisectionResult | BrentResult
+        Result object corresponding to the selected method.
+
+    Raises
+    ------
+    ValueError
+        If the supplied arguments are inconsistent with the selected
+        method.
     """
     method = method.lower()
 
@@ -60,16 +89,28 @@ def solve_system(
     line_search: bool = True,
 ):
     """
-    Solve a nonlinear system F(x)=0 for x in R^n using the specified method.
+    Solve a system of nonlinear equations using the selected solver.
 
-    Currently supported:
-      - method="newton" (multidimensional Newton)
+    Parameters
+    ----------
+    method : str
+        Name of the solver. Currently only ``"newton"`` is supported.
+    F : Callable[[np.ndarray], np.ndarray]
+        Vector-valued nonlinear function.
+    x0 : ArrayLike
+        Initial approximation.
+    jac : Callable, optional
+        Analytic Jacobian.
 
-    Notes
-    -----
-    - If jac is None, a finite-difference Jacobian is used.
-    - tol_f is the tolerance on ||F(x)||_2.
-    - tol_x is the tolerance on ||dx||_2.
+    Returns
+    -------
+    NewtonSystemResult
+        Structured result returned by the multidimensional Newton solver.
+
+    Raises
+    ------
+    ValueError
+        If an unsupported method is requested.
     """
     method = method.lower()
 

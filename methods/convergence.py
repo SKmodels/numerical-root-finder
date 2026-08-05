@@ -2,7 +2,30 @@ import math
 from typing import List
 
 def estimate_order(errors: List[float], eps: float = 1e-14) -> float:
-    """ Estimate the order of convergence using classical 3-point formula. p = log(|e_{n+1}|/|e_n|) / log(|e_n|/|e_{n-1}|) """
+    """
+    Estimate the asymptotic order of convergence from a sequence of errors.
+
+    Parameters
+    ----------
+    errors : Sequence[float]
+        Sequence of successive approximation errors.
+
+    Returns
+    -------
+    float
+        Estimated convergence order.
+
+    float
+        Estimated convergence order.
+
+    Notes
+    -----
+    The estimate is based on the classical logarithmic ratio
+
+        p = log(e_{n+1}/e_n) / log(e_n/e_{n-1}),
+
+    using the final entries of the supplied error sequence.
+    """
     e = [x for x in errors if x > eps]
 
     if len(e) < 3:

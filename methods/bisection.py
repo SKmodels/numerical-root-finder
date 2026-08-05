@@ -24,11 +24,38 @@ def bisection_method(
     tol: float = 1e-8,
     max_iter: int = 100,
 ) -> BisectionResult:
-    """ 
-    Find a root of f(x) = 0 on [a,b] using the bisection method.  
+    """
+    Solve a scalar nonlinear equation using the bisection method.
 
-    Requirements
-    - f(a) and f(b) must have opposite signs (i.e. bracket a root).
+    Parameters
+    ----------
+    f : Callable[[float], float]
+        Scalar function for which a root is sought.
+    a : float
+        Left endpoint of the initial bracketing interval.
+    b : float
+        Right endpoint of the initial bracketing interval.
+    tol : float, optional
+        Desired interval width for convergence.
+    max_iter : int, optional
+        Maximum number of iterations.
+
+    Returns
+    -------
+    BisectionResult
+        Structured result containing the computed root, convergence
+        status, iteration count, approximation history, and final
+        bracketing interval.
+
+    Raises
+    ------
+    ValueError
+        If ``f(a)`` and ``f(b)`` do not have opposite signs.
+
+    Notes   
+    -----
+    The bisection method is guaranteed to converge provided the initial
+    interval brackets a root and the function is continuous.
     """
     fa = f(a)
     fb = f(b)

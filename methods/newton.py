@@ -21,8 +21,33 @@ def newton_method(
     max_iter: int = 50,
     min_derivative: float = 1e-12,
 ) -> NewtonResult:
-    """ 
-    Solve f(x) = 0 using the Newton-Raphson method. 
+    """
+    Solve a scalar nonlinear equation using the Newton–Raphson method.
+
+    Parameters
+    ----------
+    f : Callable[[float], float]
+        Scalar function for which a root is sought.
+    df : Callable[[float], float]
+        Derivative of the function ``f``.
+    x0 : float
+        Initial guess for the root.
+    tol : float, optional
+        Absolute convergence tolerance for successive iterates.
+    max_iter : int, optional
+        Maximum number of Newton iterations.
+
+    Returns 
+    -------
+    NewtonResult
+        Structured result containing the computed root, convergence
+        status, iteration count, and history of approximations.
+
+    Notes
+    -----
+    Newton's method exhibits quadratic convergence near a simple root,
+    provided that the initial guess is sufficiently close and the
+    derivative is non-zero.
     """
     x = float(x0)
     history: List[float] = [x]

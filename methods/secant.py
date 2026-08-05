@@ -22,26 +22,32 @@ def secant_method(
     max_iter: int = 50,
     min_denom: float = 1e-14,
 ) -> SecantResult:
-    """ 
-    Solve f(x) = 0 using the Secant method.
+    """
+    Solve a scalar nonlinear equation using the secant method.
 
     Parameters
     ----------
-    f: callable
-        Function f(x).
-    x0, x1: float
-        Two initial guesses. (No need to bracket the root, but they should be close to it for good convergence.)
-    tol: float
-        Convergence tolerance on step size |x_{n+1} - x_n|.
-    max_iter : int
-        Maximum iterations.
-    min_denom : float
-        Minimum allowed |f(x1) - f(x0)| to avoid division by zero.
+    f : Callable[[float], float]
+        Scalar function for which a root is sought.
+    x0 : float
+        First initial approximation.
+    x1 : float
+        Second initial approximation.
+    tol : float, optional
+        Absolute convergence tolerance.
+    max_iter : int, optional
+        Maximum number of iterations.
 
     Returns
     -------
     SecantResult
-        root, iterations, converged and history.     
+        Structured result containing the computed root, convergence
+        status, iteration count, and history of approximations.
+
+    Notes
+    -----
+    The secant method is derivative-free and converges superlinearly
+    under suitable conditions, although convergence is not guaranteed.
     """
     fx0 = f(x0)
     fx1 = f(x1)

@@ -88,38 +88,50 @@ def newton_system(
     fd_eps: float = 1e-6,
 ) -> NewtonSystemResult:
     """
-    Solve a square nonlinear system F(x)=0 using Newton's method.
+    Solve a system of nonlinear equations using Newton's method.
 
     Parameters
     ----------
-    F:
-        Function mapping R^n -> R^n.
-    x0:
-        Initial guess.
-    jac:
-        Optional Jacobian function J(x) with shape (n, n). If None, finite differences are used.
-    tol_f:
-        Convergence tolerance on ||F(x)||_2.
-    tol_x:
-        Convergence/stagnation tolerance on ||dx||_2.
-    max_iter:
-        Maximum Newton iterations.
-    line_search:
-        If True, uses backtracking line search (Armijo-style on ||F||^2).
-    alpha0:
-        Initial step scale for line search.
-    c1:
-        Armijo constant (small positive).
-    ls_shrink:
-        Backtracking shrink factor in (0,1).
-    ls_max_steps:
-        Max backtracking steps.
-    fd_method, fd_eps:
-        Finite-difference Jacobian settings (if jac is None).
+    F : Callable[[np.ndarray], np.ndarray]
+        Vector-valued function defining the nonlinear system.
+    x0 : ArrayLike
+        Initial approximation to the solution.
+    jac : Callable[[np.ndarray], np.ndarray], optional
+        Analytic Jacobian of ``F``. If omitted, a finite-difference
+        approximation is used.
+    tol_f : float, optional
+        Convergence tolerance for the residual norm.
+    tol_x : float, optional
+        Convergence tolerance for the Newton step norm.
+    max_iter : int, optional
+        Maximum number of Newton iterations.
+    line_search : bool, optional
+        Whether to apply Armijo-style backtracking line search.
+    fd_method : {"forward", "central"}, optional
+        Finite-difference scheme used when no analytic Jacobian is
+        supplied.
+    fd_eps : float, optional
+        Perturbation size for finite differences.
 
     Returns
     -------
     NewtonSystemResult
+        Structured result containing the computed solution, convergence
+        status, iteration count, residual norms, step norms, and solver
+        diagnostics.
+
+    Notes
+    -----
+    Each iteration solves
+
+        J(x_k) Δx = -F(x_k)
+
+    and updates
+
+        x_{k+1} = x_k + αΔx,
+
+    where α is optionally determined using an Armijo-style
+    backtracking line search.
     """
     x = _as_float_vector(x0)
     fx = np.asarray(F(x), dtype=float).reshape(-1)
